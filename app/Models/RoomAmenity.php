@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoomAmenity extends Model
 {
+    use HasFactory;
     protected $table = 'room_amenity';
     protected $fillable = [
         'id',
@@ -19,5 +20,5 @@ class RoomAmenity extends Model
         'updated_at',
         'deleted_at'
     ]; 
-    use HasFactory;
+    
 }

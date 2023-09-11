@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class HotelSetting extends Model
 {
+    use HasFactory;
     protected $table = 'hotel_setting';
     protected $fillable = [
         'id',
@@ -23,5 +24,5 @@ class HotelSetting extends Model
         'logo',
         'deleted_by'
     ];
-    use HasFactory;
+   
 }

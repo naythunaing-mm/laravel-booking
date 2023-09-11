@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -64,5 +65,12 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'admin'    => \App\Http\Middleware\AdminMiddleware::class,
     ];
+    protected function schedule(Schedule $schedule)
+{
+    $schedule->command('backup:clean')->daily()->at('01:00');
+    $schedule->command('backup:run')->daily()->at('02:00');
+}
+
 }

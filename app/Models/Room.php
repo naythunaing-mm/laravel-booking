@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
+    use HasFactory;
     protected $table = 'room';
     protected $fillable = [
         'id',
@@ -20,7 +21,6 @@ class Room extends Model
         'price_per_day',
         'extra_bed_price',
         'thumbnail',
-        'type',
         'created_by',
         'updated_by',
         'deleted_by',
@@ -28,5 +28,5 @@ class Room extends Model
         'updated_at',
         'deleted_at'
     ]; 
-    use HasFactory;
+    
 }

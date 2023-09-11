@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    use HasFactory;
     protected $table = 'customer';
     protected $fillable = [
         'id',
@@ -20,5 +21,5 @@ class Customer extends Model
         'updated_at',
         'deleted_at'
     ]; 
-    use HasFactory;
+   
 }
