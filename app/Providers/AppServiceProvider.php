@@ -13,6 +13,8 @@ use App\Repository\Room\RoomRepository;
 use App\Repository\Room\RoomRepositoryInterface;
 use App\Repository\Feature\FeatureRepository;
 use App\Repository\Feature\FeatureRepositoryInterface;
+use App\Repository\roomGallery\roomGalleryRepository;
+use App\Repository\roomGallery\roomGalleryRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AmenityRepositoryInterface::class, AmenityRepository::class);
         $this->app->bind(RoomRepositoryInterface::class, RoomRepository::class);
         $this->app->bind(FeatureRepositoryInterface::class, FeatureRepository::class);
+        $this->app->bind(roomGalleryRepositoryInterface::class, roomGalleryRepository::class);
     }
 
     /**

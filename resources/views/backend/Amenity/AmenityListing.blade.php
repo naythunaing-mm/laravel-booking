@@ -41,7 +41,7 @@
                     </td>
                     <td>
                       <a href="{{ URL::asset('admin-backend/amenity/edit')}}/{{ $amenity->id }}" class="btn btn-info btn-xs"><small><i class="fa fa-pencil"></i>Edit</small></a>
-                      <a href="{{ URL::asset('admin-backend/amenity/delete')}}/{{ $amenity->id }}" class="btn btn-danger btn-xs"><small><i class="fa fa-trash-o"></i>Delete</small></a>
+                      <a href="{{ URL::asset('admin-backend/amenity/delete')}}/{{ $amenity->id }}" onclick="return confirm('Are you sure you want to delete this Amenity?');" class="btn btn-danger btn-xs"><small><i class="fa fa-trash-o"></i>Delete</small></a>
                     </td>
                 </tr>
                 @endforeach 

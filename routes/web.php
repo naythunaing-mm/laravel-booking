@@ -74,10 +74,16 @@ Route::group(['prefix' => 'admin-backend','middleware' => 'admin'], function () 
         Route::get('delete/{id}',[RoomController::class,'RoomDelete']);
         Route::get('create',[RoomController::class,'RoomForm'])->name('RoomForm');
         Route::get('listing',[RoomController::class,'RoomListing'])->name('RoomListing');
+        Route::get('edit/{id}',[RoomController::class,'RoomEdit']);
+        Route::post('update',[RoomController::class,'RoomUpdate'])->name('RoomUpdate');
         Route::post('created', [RoomController::class,'RoomCreate'])->name('RoomCreate');
         Route::post('updated',[RoomController::class,'RoomUpdate'])->name('RoomUpdate');
-        Route::get('roomGallery/{id}',[RoomController::class,'galleryCreate']);
-       
+        Route::get('room-gallery/{id}',[RoomController::class,'galleryForm'])->name('galleryForm');
+        Route::get('room-gallery/delete/{id}',[RoomController::class,'deleteGallery']);
+        Route::get('room-gallery/edit/{id}',[RoomController::class,'editGallery']);
+        Route::post('room-gallery/update',[RoomController::class,'updateGallery'])->name('updateGallery');
+        Route::post('room-gallery/create',[RoomController::class,'galleryCreate'])->name('roomGallery');
+        
     });
 
     // for special feature 

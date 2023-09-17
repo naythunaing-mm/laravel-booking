@@ -32,9 +32,10 @@
                     <tr>
                         <td>{{ $bed->id }}</td>
                         <td>{{ $bed->name }}</td>
+                        <th>{{ getRoomByBed($bed) }}</th>
                         <td>
                         <a href="{{ URL::asset('admin-backend/bed/edit')}}/{{ $bed->id }}" class="btn btn-info btn-xs"><small><i class="fa fa-pencil"></i>Edit</small></a>
-                        <a href="{{ URL::asset('admin-backend/bed/delete')}}/{{ $bed->id }}" class="btn btn-danger btn-xs"><small><i class="fa fa-trash-o"></i>Delete</small></a>
+                        <a href="{{ URL::asset('admin-backend/bed/delete')}}/{{ $bed->id }}" onclick="return confirm('Are you sure you want to delete this Bed?');" class="btn btn-danger btn-xs"><small><i class="fa fa-trash-o"></i>Delete</small></a>
                         </td>
                     </tr>
                   @endforeach

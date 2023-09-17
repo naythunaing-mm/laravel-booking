@@ -2,6 +2,7 @@
     namespace App\Repository\Amenity;
     use App\Repository\Amenity\AmenityRepositoryInterface;
     use App\Models\Amenity;
+    use App\Models\RoomAmenity;
     use App\Utility;
     use App\ReturnMessage;
     class AmenityRepository implements AmenityRepositoryInterface {
@@ -51,6 +52,18 @@
                 return $returnedObj;
             }
            
+        }
+        public function getAmenityByroomId($roomId){
+            $amenityData = [];
+            $data = RoomAmenity::SELECT("amenity_id")
+                    ->WHERE("room_id",$roomId)
+                    ->whereNull("deleted_at")
+                    ->get();
+            foreach($data as $amenity) {
+                array_push($amenityData,$amenity->amenity_id);
+            }
+            return $amenityData;
+
         }
 
     }

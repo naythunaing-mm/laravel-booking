@@ -24,6 +24,7 @@
                   <tr>
                     <th>View ID</th>
                     <th>View Name</th>
+                    <th>Room</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -32,9 +33,10 @@
                     <tr>
                         <td>{{ $view->id }}</td>
                         <td>{{ $view->name }}</td>
+                        <td>{{ getRoomByView($view) }}</td>
                         <td>
                         <a href="{{ URL::asset('admin-backend/view/edit')}}/{{ $view->id }}" class="btn btn-info btn-xs"><small><i class="fa fa-pencil"></i>Edit</small></a>
-                        <a href="{{ URL::asset('admin-backend/view/delete')}}/{{ $view->id }}" class="btn btn-danger btn-xs"><small><i class="fa fa-trash-o"></i>Delete</small></a>
+                        <a href="{{ URL::asset('admin-backend/view/delete')}}/{{ $view->id }}" onclick="return confirm('Are you sure you want to delete this View?');" class="btn btn-danger btn-xs"><small><i class="fa fa-trash-o"></i>Delete</small></a>
                         </td>
                     </tr>
                   @endforeach

@@ -20,5 +20,9 @@ class RoomAmenity extends Model
         'updated_at',
         'deleted_at'
     ]; 
+    public function getRoomAmenityByRoom() {
+        return $this->hasMany(Room::class,'room_id','id');
+    }
+
     
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Bed extends Model
 {
@@ -18,6 +19,9 @@ class Bed extends Model
         'created_at',
         'updated_at',
         'deleted_at'
-    ]; 
+    ];
+    public function getRoomByBed() {
+        return $this->hasMany(Room::class,'bed_id','id');
+    } 
    
 }

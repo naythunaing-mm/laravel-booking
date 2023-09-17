@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\room;
-
-use Illuminate\Foundation\Http\FormRequest;
+namespace App\Http\Requests\Room;
 use Illuminate\Validation\Rule;
 
-class RoomRequest extends FormRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class RoomUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,6 +26,7 @@ class RoomRequest extends FormRequest
             'name'           => ['required','string',
                                 Rule::unique('room','name')
                                 ->whereNull('deleted_at')
+                                ->ignore($this->id) 
                                 ],
             'occupancy'      => ['required','integer'],
             'bed'            => ['required','integer'],
@@ -36,10 +37,9 @@ class RoomRequest extends FormRequest
             'specialfeature' => ['required','array'],
             'amenity'        => ['required','array'], 
             'detail'         => ['required','string'],
-            'description'    => ['required','string'],    
-            'file'           => ['required','file','mimes:jpg,png,gif,jepg'],     
+            'description'    => ['required','string'],  
+            'file'         => ['sometimes','file','mimes:jpg,png,gif,jepg'],        
         ];
-            
     }
     public function messages(){
         return [
@@ -57,9 +57,8 @@ class RoomRequest extends FormRequest
             'amenity.required'        => 'Please choose Amenity',
             'detail.required'         => 'Please fill Room Detail',
             'description.required'    => 'Please fill Room Description',
-            'file.required'           => 'Please fill Room Image',
+            'file.required'           => 'Please fill Room Description',
             'file.mimes'              => 'This room image is must be JPG, PNG, GIF, JEPG',
         ];
     }
-    
 }

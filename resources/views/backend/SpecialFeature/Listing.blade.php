@@ -31,7 +31,7 @@
                     <td>{{ $feature->name }}</td>
                     <td>
                     <a href="{{ URL::asset('admin-backend/feature/edit')}}/{{ $feature->id }}" class="btn btn-info btn-xs"><small><i class="fa fa-pencil"></i>Edit</small></a>
-                    <a href="{{ URL::asset('admin-backend/feature/delete')}}/{{ $feature->id }}" class="btn btn-danger btn-xs"><small><i class="fa fa-trash-o"></i>Delete</small></a>
+                    <a href="{{ URL::asset('admin-backend/feature/delete')}}/{{ $feature->id }}" onclick="return confirm('Are you sure you want to delete this SpecialFeature?');" class="btn btn-danger btn-xs"><small><i class="fa fa-trash-o"></i>Delete</small></a>
                     </td>
                 </tr>
                   @endforeach

@@ -2,6 +2,7 @@
     namespace App\Repository\Feature;
     use App\Repository\Feature\FeatureRepositoryInterface;
     use App\Models\SpecialFeature;
+    use App\Models\RoomSpecialFeature;
     use App\Utility;
     use App\ReturnMessage;
     class FeatureRepository implements FeatureRepositoryInterface {
@@ -48,6 +49,18 @@
                 return $returnedObj;
             }
            
+        }
+        public function getFeatureByroomId($roomId){
+            $featureData = [];
+            $data = RoomSpecialFeature::SELECT("special_feature_id")
+                    ->WHERE("room_id",$roomId)
+                    ->whereNull("deleted_at")
+                    ->get();
+            foreach($data as $feature) {
+                array_push($featureData,$feature->special_feature_id);
+            }
+            return $featureData;
+
         }
 
     }

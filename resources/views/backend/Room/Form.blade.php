@@ -12,19 +12,27 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="x_panel">
                         <div class="x_content">
+                            @if(isset($editData))
+                            <form action="{{ route('RoomUpdate') }}" method="POST" id="form-create" enctype="multipart/form-data" >
+                            @else
                             <form action="{{ route('RoomCreate') }}" method="POST" id="form-create" enctype="multipart/form-data" >
+                            @endif
                                 <span class="section">Room Create</span>
                                 @csrf
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align">Image<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
                                         <div id="preview-wrapper">
-                                            <div class="vertical-center" >
+                                            <div class="vertical-center" style="{{ isset($editData) ? "display:none;" : "" }}">
                                                 <label class="file-choose" onclick="chooseFile()">Choose File</label>
                                             </div>
-                                            <div class="" id="preview-img" style="display:none;" >
+                                            <div class="" id="preview-img" style="{{ isset($editData) ? "" : "display:none;" }}" >
                                             <label for="" class="change-img" onclick="changePhoto()">Change Photo</label>
-                                                <img src="" alt="" id="upload-img">
+                                            @if(isset($editData))
+                                            <img src="{{ URL::asset('assets/upload/'. $editData->id . '/thumb/'. $editData->thumbnail ) }}?" alt="Existing Room Image" style="width:100%;" id="upload-img">
+                                            @else
+                                            <img src="" alt="" id="upload-img">
+                                            @endif
                                             </div>
                                             @if($errors->has('thumbnail'))
                                                 <p style="color:red">{{ $errors->first('thumbnail') }}</p>
@@ -37,7 +45,7 @@
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align" for="name">Name<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control room_name" name="name" placeholder="ex. Depluex" type="text" id="name"/>
+                                        <input class="form-control room_name" name="name" placeholder="ex. Depluex" type="text" id="name" value="{{ old('name',isset($editData) ? $editData->name : '') }}" />
                                     </div>
                                     @if($errors->has('name'))
                                      <p style="color:red">{{ $errors->first('name') }}</p>
@@ -48,7 +56,7 @@
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align " for="occupancy">Occupancy <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control room_occupancy" type="text"  name="occupancy" id="occupancy" placeholder="ex. 2 or 3">
+                                        <input class="form-control room_occupancy" type="text"  name="occupancy" id="occupancy" placeholder="ex. 2 or 3" value="{{ old('name',isset($editData) ? $editData->occupancy : '') }}" />
                                     </div>
                                     @if($errors->has('occupancy'))
                                      <p style="color:red">{{ $errors->first('occupancy') }}</p>
@@ -62,7 +70,7 @@
                                         <select class="select2_group form-control room_bed" id="bed" name="bed">
                                         <option value=""> Choose Bed Type </option>  
                                         @foreach ($roomBed as $bed)
-                                         <option value="{{ $bed->id }}" {{ old('bed') == $bed->id ? 'selected' : ''}}>{{ $bed->name }}</option>
+                                         <option value="{{ $bed->id }}" {{ (old('bed_id',isset($editData) ? $editData->bed_id : '') == $bed->id) ? 'selected' : ''}} >{{ $bed->name }}</option>
                                         @endforeach
                                         </select>
                                     </div>
@@ -75,7 +83,7 @@
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align" for="room_size">Room Size <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control room_size" type="text" name="size" id="room_size" data-validate-minmax="10,100"  placeholder="ex. 10 mm²">
+                                        <input class="form-control room_size" type="text" name="size" id="room_size" data-validate-minmax="10,100"  placeholder="ex. 10 mm²" value="{{ old('size',isset($editData) ? $editData->size : '') }}" />
                                     </div>
                                     <label class="col-form-label col-md-3 col-sm-3 size-label-error hide"><span class="size-error-msg" style="color:red;"></span></label>
                                     @if($errors->has('size'))
@@ -89,7 +97,7 @@
                                         <select class="select2_group form-control room_view"  name="view">
                                             <option value=""> Choose View </option>
                                             @foreach ($roomView as $view)
-                                            <option value="{{ $view->id }}" {{ old('view') == $view->id ? 'selected' : '' }} >{{ $view->name }}</option>    
+                                            <option value="{{ $view->id }}" {{ (old('view_id',isset($editData) ? $editData->view_id : '') == $view->id) ? 'selected' : ''}} >{{ $view->name }}</option>    
                                             @endforeach
                                         </select>
                                     </div>
@@ -102,7 +110,7 @@
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align" for="price_per_day">Price Per Day <small>($)</small> <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control room_price" type="text"  name="price" data-validate-minmax="10,100"  id="price_per_day" placeholder="ex. 30$">
+                                        <input class="form-control room_price" type="text"  name="price" data-validate-minmax="10,100"  id="price_per_day" placeholder="ex. 30$" value="{{ old('size',isset($editData) ? $editData->price_per_day : '') }}" >
                                     </div>
                                     @if($errors->has('price'))
                                      <p style="color:red">{{ $errors->first('price') }}</p>
@@ -113,7 +121,7 @@
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align" for="extra_price">Extra Bed Price Per Day <small>($)</small> <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control room_extra" type="text"  name="extraBed" data-validate-minmax="10,100" id="extra_price" placeholder="ex. 1.8$">
+                                        <input class="form-control room_extra" type="text"  name="extraBed" data-validate-minmax="10,100" id="extra_price" placeholder="ex. 1.8$" value="{{ old('size',isset($editData) ? $editData->extra_bed_price : '') }}">
                                     </div>
                                     @if($errors->has('extraBed'))
                                      <p style="color:red">{{ $errors->first('extraBed') }}</p>
@@ -129,7 +137,7 @@
                                             <div class="col-md-6">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" class="room_feature"  value="{{ $feature->id }}" name="specialfeature[]" {{ is_array(old('specialfeature')) && in_array($feature->id, old('specialfeature')) ? 'checked': '' }}>{{ $feature->name }}
+                                                        <input type="checkbox" class="room_feature"  value="{{ $feature->id }}" name="specialfeature[]" {{ (is_array(old('specialfeature')) && in_array($feature->id, old('feature'))) || (isset($featureByRoomId) && is_array($featureByRoomId) && in_array($feature->id,$amenityByroomId)) ? 'checked': '' }}>{{ $feature->name }}
                                                     </label> 
                                                 </div>
                                             </div>  
@@ -150,7 +158,7 @@
                                             <div class="col-md-6">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" class="room_amenity" value="{{ $amenity->id }}" name="amenity[]"  {{ is_array(old('amenity')) && in_array($amenity->id, old('amenity')) ? 'checked': '' }} >{{ $amenity->name }}
+                                                    <input type="checkbox" class="room_amenity" value="{{ $amenity->id }}" name="amenity[]"  {{ (is_array(old('amenity')) && in_array($amenity->id, old('amenity'))) || (isset($amenityByroomId) && is_array($amenityByroomId) && in_array($amenity->id,$amenityByroomId)) ? 'checked': '' }} >{{ $amenity->name }}
                                                 </label>  
                                             </div>
                                             </div>
@@ -166,7 +174,7 @@
                                     <label class="control-label col-md-3 col-sm-3 label-align" for="room_detail">Room Details<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <textarea class="form-control room_detail" rows="2" name="detail" id="room_detail" placeholder="ex. Room Details"></textarea>
+                                        <textarea class="form-control room_detail" rows="2" name="detail" id="room_detail" placeholder="ex. Room Details" >{{ old('size',isset($editData) ? $editData->detail : '') }}</textarea>
                                     </div>
                                     @if($errors->has('detail'))
                                      <p style="color:red">{{ $errors->first('detail') }}</p>
@@ -178,7 +186,7 @@
                                     <label class="control-label col-md-3 col-sm-3 label-align" for="description">Room Description<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <textarea class="form-control room_des" rows="3" name="description" id="description" placeholder="ex. Room Description"></textarea>
+                                        <textarea class="form-control room_des" rows="3" name="description" id="description" placeholder="ex. Room Description" >{{ old('size',isset($editData) ? $editData->description : '') }}</textarea>
                                     </div>
                                     @if($errors->has('description'))
                                      <p style="color:red">{{ $errors->first('description') }}</p>
@@ -191,6 +199,9 @@
                                         <div class="col-md-6 offset-md-3">
                                             <button type='button' class="btn btn-primary" id="submit-btn">Submit</button>
                                             <button type='button' class="btn btn-success" id="reset">Reset</button>
+                                            @if(isset($editData))
+                                            <input type="hidden" value="{{ $editData->id }}" name="id" >
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

@@ -1,7 +1,7 @@
 <?php
     namespace App\Repository\Room;
     interface RoomRepositoryInterface {
-        public function getRoom();
+        public function getRoomListing();
         public function RoomEdit($id);
         public function RoomCreate($data);
         public function update($data);

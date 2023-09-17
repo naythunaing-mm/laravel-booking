@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('size_unit',20);
             $table->string('occupancy',30);
             $table->string('price_unit',30);
-            $table->string('logo',150);
+            $table->string('logo',150)->nullable();
             $table->integer('deleted_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
