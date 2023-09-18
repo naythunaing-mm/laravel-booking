@@ -129,6 +129,19 @@
             }
             return true;
         }
+        public function roomRandomById() {
+            $rooms = Room::select(
+                                    'id',
+                                    'name',
+                                    'price_per_day',
+                                    'thumbnail',
+                    )
+                    ->whereNull('deleted_at')
+                    ->inRandomOrder()
+                    ->limit(6)
+                    ->get();
+            return $rooms;
+        }
         public function getRoomListing(){
             $rooms = Room::select(
                                     'room.id',

@@ -15,8 +15,8 @@ class settingTableSeeder extends Seeder
     {
         DB::table('hotel_setting')->truncate();
         DB::table('hotel_setting')->insert([
-            'id'            => '1',
-            'name'          => 'softguide',
+            'id'             => '1',
+            'name'           => 'softguide',
             'email'          => 'softguide@gmail.com',
             'address'        => 'B(32) Hledan, Yangon.',
             'checkin'        => '12:00 PM',

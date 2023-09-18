@@ -19,7 +19,6 @@
                 <p class="lead">
                     The page you’re looking for doesn’t exist.
                   </p>
-                <a href="{{ route('index') }}" class="btn btn-primary">Go Home</a>
             </div>
         </div>
     </body>

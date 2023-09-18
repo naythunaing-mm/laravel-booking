@@ -8,6 +8,7 @@ use App\Http\Controllers\Room\RoomController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Amenity\AmenityController;
 use App\Http\Controllers\errors\RouteErrorController;
+use App\Http\Controllers\Frontend\frontendController;
 use App\Http\Controllers\SpecialFeature\SpecialFeatureController;
 
 
@@ -21,10 +22,9 @@ use App\Http\Controllers\SpecialFeature\SpecialFeatureController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[frontendController::class,'index'])->name('frontendindex');
+Route::get('about',[frontendController::class,'about'])->name('about');
+Route::get('contact',[frontendController::class,'contact']);
 
 Route::get('admin-backend/login',[LoginController::class,'getLogin'])->name('login');
 Route::get('admin-backend/logout',[LoginController::class,'getLogout'])->name('logout');
