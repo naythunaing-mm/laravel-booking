@@ -31,6 +31,7 @@ Route::get('admin-backend/logout',[LoginController::class,'getLogout'])->name('l
 Route::post('admin-backend/login',[LoginController::class,'postlogin'])->name('postlogin');
 
 Route::get('/room/detail/{id}',[frontendController::class,'frontendDetail']);
+Route::get('rooms',[frontendController::class,'rooms'])->name('rooms');
 Route::group(['prefix' => 'admin-backend','middleware' => 'admin'], function () {
     Route::get('index', [HomeController::class,'index'])->name('index');
 

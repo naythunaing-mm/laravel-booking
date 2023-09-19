@@ -1,6 +1,5 @@
 @extends('frontend.layouts.master')
 @section('title', 'Admin::Home Page')
-
 @section('content')
 <section class="ftco-section">
     <div class="container">

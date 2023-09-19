@@ -9,5 +9,6 @@
         public function roomRandomById();
         public function roomAmenityByroomId($id);
         public function roomFeatureByroomId($id);
+        public function rooms();
     }
 ?>

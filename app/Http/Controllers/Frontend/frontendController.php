@@ -30,4 +30,8 @@ class frontendController extends Controller
         $room = $this->RoomRepository->RoomEdit($id);
         return view('frontend.room.roomDetail',compact(['room','amenity_data','feature_data']));
     }
+    public function rooms() {
+        $rooms_data = $this->RoomRepository->rooms();
+        return view('frontend.room.rooms',compact(['rooms_data']));
+    }
 }

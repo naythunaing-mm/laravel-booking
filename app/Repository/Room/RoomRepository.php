@@ -229,6 +229,18 @@ use Illuminate\Support\Facades\DB;
                             ->get();
             return $feature_data;
         }
+        public function rooms() {
+            $rooms = Room::select (
+                                    'id',
+                                    'name',
+                                    'price_per_day',
+                                    'thumbnail',
+                                    )
+                                    ->whereNull('deleted_at')
+                                    ->inRandomOrder()
+                                    ->get();
+            return $rooms;
+        }
      
         
     }
