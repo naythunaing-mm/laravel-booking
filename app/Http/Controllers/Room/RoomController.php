@@ -198,5 +198,19 @@ class RoomController extends Controller
             abort(500);
         }
     }
-
+    public function RoomDetail($id) {
+        $editData        = $this->RoomRepository->RoomEdit($id);
+        $roomBed         = $this->BedRepository->getBed();
+        $roomView        = $this->ViewRepository->getView();
+        $roomAmenity     = $this->AmenityRepository->getAmenity();
+        $roomFeature     = $this->FeatureRepository->getFeature();
+        $featureByRoomId = $this->FeatureRepository->getFeatureByroomId($id);
+        $amenityByroomId = $this->AmenityRepository->getAmenityByroomId($id);
+        if($editData == null) {
+            abort(404);
+        }
+        return view('backend.Room.Detail',compact(['editData','roomBed','roomView','roomAmenity','roomFeature','amenityByroomId','featureByRoomId']));  
+    }
+   
+   
 }

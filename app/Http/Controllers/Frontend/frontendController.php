@@ -24,4 +24,10 @@ class frontendController extends Controller
     public function contact() {
         return view('frontend.layouts.partial.contact');
     }
+    public function frontendDetail($id) {
+        $amenity_data = $this->RoomRepository->roomAmenityByroomId($id);
+        $feature_data = $this->RoomRepository->roomFeatureByroomId($id);
+        $room = $this->RoomRepository->RoomEdit($id);
+        return view('frontend.room.roomDetail',compact(['room','amenity_data','feature_data']));
+    }
 }

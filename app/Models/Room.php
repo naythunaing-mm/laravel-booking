@@ -40,5 +40,11 @@ class Room extends Model
     public function getView():BelongsTo{
         return $this->belongsTo(View::class, 'view_id', 'id');
     }
+    public function getBed():BelongsTo{
+        return $this->belongsTo(Bed::class, 'bed_id', 'id');
+    }
+    public function getGallery() :HasMany {
+        return $this->hasMany(RoomGallery::class,'room_id','id');
+    }
     
 }

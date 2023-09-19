@@ -21,4 +21,5 @@ class RoomGallery extends Model
         'deleted_at'
     ]; 
     
+    
 }

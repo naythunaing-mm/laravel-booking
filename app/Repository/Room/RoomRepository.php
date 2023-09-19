@@ -8,7 +8,8 @@
     use App\Models\RoomAmenity;
     use App\Repository\Room\RoomRepositoryInterface;
     use App\Models\RoomSpecialFeature;
-    use Illuminate\Support\Facades\DB;
+use App\Models\SpecialFeature;
+use Illuminate\Support\Facades\DB;
     
     class RoomRepository implements RoomRepositoryInterface {
         public function RoomCreate($data){
@@ -130,16 +131,16 @@
             return true;
         }
         public function roomRandomById() {
-            $rooms = Room::select(
+            $rooms = Room::select (
                                     'id',
                                     'name',
                                     'price_per_day',
                                     'thumbnail',
-                    )
-                    ->whereNull('deleted_at')
-                    ->inRandomOrder()
-                    ->limit(6)
-                    ->get();
+                                    )
+                                    ->whereNull('deleted_at')
+                                    ->inRandomOrder()
+                                    ->limit(6)
+                                    ->get();
             return $rooms;
         }
         public function getRoomListing(){
@@ -186,5 +187,49 @@
                 return $returnedObj;
             }     
         }
+        public function roomDetail($id){
+            $rooms = Room::select(
+                                    'room.id',
+                                    'room.name',
+                                    'room.size',
+                                    'room.occupancy',
+                                    'room.bed_id',
+                                    'room.view_id',
+                                    'room.thumbnail',
+                                    'room.description',
+                                    'room.detail',
+                                    'room.price_per_day',
+                                    'room.extra_bed_price',
+                                    'bed.name as bed_name', 
+                                    'view.name as view_name', 
+                                )
+                                ->leftJoin('bed', 'room.bed_id', '=', 'bed.id') 
+                                ->leftJoin('view', 'room.view_id', '=', 'view.id') 
+                                ->whereNull('room.deleted_at')
+                                ->whereNull('bed.deleted_at')
+                                ->whereNull('view.deleted_at')
+                                ->get();
+            return $rooms;
+        }
+        public function roomAmenityByroomId($id) {
+            $amenity_data = RoomAmenity::SELECT("amenity.name","amenity.type")
+                            ->leftJoin("amenity","amenity.id","room_amenity.amenity_id")
+                            ->WHERE("room_amenity.room_id",$id)
+                            ->whereNull("room_amenity.deleted_at")
+                            ->whereNull("amenity.deleted_at")
+                            ->get();
+            return $amenity_data;
+        }
+        public function roomFeatureByroomId($id) {
+            $feature_data = RoomSpecialFeature::SELECT("special_feature.name")
+                            ->leftJoin("special_feature","special_feature.id","room_special_feature.special_feature_id")
+                            ->WHERE("room_special_feature.special_feature_id",$id)
+                            ->whereNull("room_special_feature.deleted_at")
+                            ->whereNull("special_feature.deleted_at")
+                            ->get();
+            return $feature_data;
+        }
+     
+        
     }
 ?>

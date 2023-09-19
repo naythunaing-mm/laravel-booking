@@ -30,6 +30,7 @@ Route::get('admin-backend/login',[LoginController::class,'getLogin'])->name('log
 Route::get('admin-backend/logout',[LoginController::class,'getLogout'])->name('logout');
 Route::post('admin-backend/login',[LoginController::class,'postlogin'])->name('postlogin');
 
+Route::get('/room/detail/{id}',[frontendController::class,'frontendDetail']);
 Route::group(['prefix' => 'admin-backend','middleware' => 'admin'], function () {
     Route::get('index', [HomeController::class,'index'])->name('index');
 
@@ -70,7 +71,7 @@ Route::group(['prefix' => 'admin-backend','middleware' => 'admin'], function () 
     // for room table 
     Route::prefix('room')->group(function () {
         Route::get('edit/{id}',[RoomController::class,'RoomEdit']);
-       
+        Route::get('detail/{id}',[RoomController::class,'RoomDetail']);
         Route::get('delete/{id}',[RoomController::class,'RoomDelete']);
         Route::get('create',[RoomController::class,'RoomForm'])->name('RoomForm');
         Route::get('listing',[RoomController::class,'RoomListing'])->name('RoomListing');
