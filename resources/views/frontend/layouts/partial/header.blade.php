@@ -13,7 +13,10 @@
 	<!-- datepicker  -->
 	<link rel="stylesheet" href="{{ URL::asset('assets/Datepicker/jquery-ui.css') }}">
     <link href="{{ URL::asset('assets/backend/css/daterangepicker.css') }}" rel="stylesheet">
-
+	
+	<script src="{{ URL::asset('assets/Datepicker/jquery.js') }}"></script>
+	<script src="{{ URL::asset('assets/Datepicker/jquery-ui.js') }}"></script>
+	
 
     <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/open-iconic-bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/animate.css') }}">
@@ -37,6 +40,7 @@
 	<link href="{{ URL::asset('assets/backend/css/pnotify/pnotify.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/backend/css/pnotify/pnotify.buttons.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/backend/css/pnotify/pnotify.nonblock.css') }}" rel="stylesheet">
+	
   </head>
   <body>
 
@@ -50,12 +54,12 @@
 	      </button>
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="{{ URL::to('/') }}" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="{{ URL::to('rooms') }}" class="nav-link">Our Rooms</a></li>
-	          <li class="nav-item"><a href="{{ URL::to('about') }}" class="nav-link">About Us</a></li>
-	          <li class="nav-item"><a href="{{ URL::to('contact') }}" class="nav-link">Contact</a></li>
-	        </ul>
+<ul class="navbar-nav ml-auto">
+	<li class="nav-item {{ request()->is('/') ? 'active' : '' }}"><a href="{{ URL::to('/') }}" class="nav-link">Home</a></li>
+	<li class="nav-item {{ request()->is('rooms') ? 'active' : '' }}"><a href="{{ URL::to('rooms') }}" class="nav-link">Our Rooms</a></li>
+	<li class="nav-item {{ request()->is('about') ? 'active' : '' }}"><a href="{{ URL::to('about') }}" class="nav-link">About Us</a></li>
+	<li class="nav-item {{ request()->is('contact') ? 'active' : '' }}"><a href="{{ URL::to('contact') }}" class="nav-link">Contact</a></li>
+</ul>
 	      </div>
 	    </div>
 	  </nav>
@@ -69,7 +73,7 @@
 	          <div class="col-md-6 ftco-animate">
 	          	<div class="text">
 	          		<h2>More than a hotel... an experience</h2>
-		            <h1 class="mb-3"></h1>
+		            <h1 class="mb-3">{{ (getsiteconfig() !== '')? getsiteconfig()->name : '' }}</h1>
 	            </div>
 	          </div>
 	        </div>

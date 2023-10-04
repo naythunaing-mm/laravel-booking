@@ -29,7 +29,7 @@ class LoginController extends Controller
             'password' => $request->get('password')
         ]);
         if($validation){
-            return redirect()->route('index');
+            return redirect()->route('index')->with('success', 'Login successful.');
         } else {
             return redirect()->route('login')
             ->withErrors('error', 'An error occurred. Please check your user name or password and try again.')

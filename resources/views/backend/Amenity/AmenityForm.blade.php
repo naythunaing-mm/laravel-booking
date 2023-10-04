@@ -1,5 +1,6 @@
-@include('layouts.partial.header')
-@yield('content')
+@extends('layouts.master')
+@section('title','Admin::Amenity Create')
+@section('content')
 
 <div class="right_col" role="main">
     <div class="">
@@ -59,7 +60,6 @@
                                         <div class="col-md-6 offset-md-3">
                                             <button type='submit' class="btn btn-primary" id="submit-btn">Submit</button>
                                             <button type='reset' class="btn btn-success" id="reset">Reset</button>
-                                            <input type="hidden" name="form-sub" value="1" />
                                             @if (isset($amenity_data))
                                                 <input type="hidden" value="{{ $amenity_data->id }}" name="id">
                                             @endif
@@ -73,9 +73,7 @@
             </div>
         </div>
     </div>
-        <!-- /page content -->
-
-    @include('layouts.partial.footer')
+       
     <script>
         $(document).ready(function(){
             $('#submit-btn').click(function(){
@@ -132,3 +130,4 @@
     <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.nonblock.js') }}"></script>
 
 </html>
+@endsection

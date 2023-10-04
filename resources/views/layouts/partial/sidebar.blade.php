@@ -71,7 +71,7 @@
           </li>
           
           <li>
-            <a href="{{ URL::to('admin-backend/sitesetting') }}"><i class="fa fa-home"></i>Site Setting</a>
+            <a href="{{ URL::to('admin-backend/setting') }}"><i class="fa fa-home"></i>Site Setting</a>
           </li>
             
         </ul>

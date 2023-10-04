@@ -3,18 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repository\Bed\BedRepositoryInterface;
-use App\Repository\Bed\BedRepository;
-use App\Repository\View\ViewRepositoryInterface;
-use App\Repository\View\ViewRepository;
-use App\Repository\Amenity\AmenityRepositoryInterface;
-use App\Repository\Amenity\AmenityRepository;
-use App\Repository\Room\RoomRepository;
-use App\Repository\Room\RoomRepositoryInterface;
-use App\Repository\Feature\FeatureRepository;
-use App\Repository\Feature\FeatureRepositoryInterface;
-use App\Repository\roomGallery\roomGalleryRepository;
-use App\Repository\roomGallery\roomGalleryRepositoryInterface;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,12 +13,6 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(RepositoryServiceProvider::class);
-        $this->app->bind(ViewRepositoryInterface::class, ViewRepository::class);
-        $this->app->bind(BedRepositoryInterface::class, BedRepository::class);
-        $this->app->bind(AmenityRepositoryInterface::class, AmenityRepository::class);
-        $this->app->bind(RoomRepositoryInterface::class, RoomRepository::class);
-        $this->app->bind(FeatureRepositoryInterface::class, FeatureRepository::class);
-        $this->app->bind(roomGalleryRepositoryInterface::class, roomGalleryRepository::class);
     }
 
     /**
@@ -37,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Paginator::useBootstrap();
+        Paginator::defaultView('pagination::bootstrap-4');
     }
 }

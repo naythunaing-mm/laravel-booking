@@ -1,5 +1,7 @@
-@include('layouts.partial.header')
-@yield('content')
+@extends('layouts.master')
+@section('title','Admin::Room Create')
+@section('content')
+
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
@@ -83,7 +85,7 @@
                                 <div class="field item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3  label-align" for="room_size">Room Size <span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input class="form-control room_size" type="text" name="size" id="room_size" data-validate-minmax="10,100"  placeholder="ex. 10 mm²" value="{{ old('size',isset($editData) ? $editData->size : '') }}" />
+                                        <input class="form-control room_size" type="text" name="size" id="room_size" data-validate-minmax="10,100"  placeholder="ex. 10 m²" value="{{ old('size',isset($editData) ? $editData->size : '') }}" />
                                     </div>
                                     <label class="col-form-label col-md-3 col-sm-3 size-label-error hide"><span class="size-error-msg" style="color:red;"></span></label>
                                     @if($errors->has('size'))
@@ -212,8 +214,7 @@
             </div>
         </div>
     </div>
-        <!-- /page content -->
-        @include('layouts.partial.footer')
+  
 <script>
             
     $(document).ready(function(){
@@ -341,12 +342,9 @@
 
 </script>
 <script src="{{ URL::asset('assets/backend/js/pages/upload_img.js?v=20230802') }}"></script>
-        <!-- /page content -->
- 
-        <!-- pnotify -->
-   <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.js') }}"></script>
-   <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.buttons.js') }}"></script>
-   <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.nonblock.js') }}"></script>
+<script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.js') }}"></script>
+<script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.buttons.js') }}"></script>
+<script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.nonblock.js') }}"></script>
    
-  
 </html>
+@endsection

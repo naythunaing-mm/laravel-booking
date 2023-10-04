@@ -1,5 +1,6 @@
-@include('layouts.partial.header')
-@yield('content')
+@extends('layouts.master')
+@section('title','Admin::View Create')
+@section('content')
 
 <div class="right_col" role="main">
     <div class="">
@@ -85,12 +86,10 @@
             }) 
         })
     </script>
-        <!-- /page content -->
-@include('layouts.partial.footer')
-         <!-- pnotify -->
+
     <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.js') }}"></script>
     <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.buttons.js') }}"></script>
     <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.nonblock.js') }}"></script>
     
-   
 </html>
+@endsection

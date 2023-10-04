@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title', 'Admin::Home Page')
+@section('title', 'SoftGuide::Room Detail')
 @section('content')
 <section class="ftco-section">
     <div class="container">
@@ -36,7 +36,7 @@
                         </div>
                         <p>{{ $room->description }}</p>
                     </div>
-                    <a href="" class="btn btn-primary py-3 px-5">Booking</a>
+                    <a href="{{ URL::to('rooms/reserve') }}/{{ $room->id }}" class="btn btn-primary py-3 px-5">Booking</a>
                 </div>
             </div>
             <div class="col-lg-4 sidebar ftco-animate pl-md-5">

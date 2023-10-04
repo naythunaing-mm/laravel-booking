@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title','Admin::Home Page')
+@section('title','SoftGuide::Contact Page')
 @section('content')
     <section class="ftco-section contact-section bg-light">
       <div class="container">

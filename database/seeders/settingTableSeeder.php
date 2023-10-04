@@ -16,7 +16,7 @@ class settingTableSeeder extends Seeder
         DB::table('hotel_setting')->truncate();
         DB::table('hotel_setting')->insert([
             'id'             => '1',
-            'name'           => 'softguide',
+            'name'           => 'SoftGuide Hotel',
             'email'          => 'softguide@gmail.com',
             'address'        => 'B(32) Hledan, Yangon.',
             'checkin'        => '12:00 PM',
@@ -26,7 +26,7 @@ class settingTableSeeder extends Seeder
             'size_unit'      => 'mm²',
             'occupancy'      => 'peoples',
             'price_unit'     => '$',
-            'logo'           => '20230811_003947_64d56733396b3.jpg',
+            'logo'           => '20230811_003947_64d56733396b3.png',
             'created_at'     => date('Y-m-d H:i:s'),
             'updated_at'     => date('Y-m-d H:i:s')
         ]);

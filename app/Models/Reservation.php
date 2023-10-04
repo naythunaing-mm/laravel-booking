@@ -18,8 +18,6 @@ class Reservation extends Model
         'total_price',
         'customer_id',
         'status',
-        'created_by',
-        'updated_by',
         'deleted_by',
         'created_at',
         'updated_at',

@@ -1,4 +1,4 @@
-
+@include('frontend.layouts.partial.instagrm')
 <footer class="ftco-footer ftco-section img" style="background-image: url({{ URL::asset('assets/frontend/images/bg_4.jpg') }});">
   <div class="overlay"></div>
   <div class="container">
@@ -69,7 +69,7 @@
 <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-<script src="{{ URL::asset('assets/frontend/js/jquery.min.js') }}"></script>
+
 <script src="{{ URL::asset('assets/frontend/js/jquery-migrate-3.0.1.min.js') }}"></script>
 <script src="{{ URL::asset('assets/frontend/js/popper.min.js') }}"></script>
 <script src="{{ URL::asset('assets/frontend/js/bootstrap.min.js') }}"></script>
@@ -84,8 +84,7 @@
 <script src="{{ URL::asset('assets/frontend/js/main.js') }}"></script>
 
 <!-- datepicker  -->
-<script src="{{ URL::asset('assets/Datepicker/jquery.js') }}"></script>
-<script src="{{ URL::asset('assets/Datepicker/jquery-ui.js') }}"></script>
+
 
 </body>
 </html>

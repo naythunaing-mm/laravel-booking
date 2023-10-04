@@ -99,9 +99,9 @@ class RoomController extends Controller
             $logs   = "Room Room Gallery Create::";
             Utility::saveDebugLog($logs);
             if($result['softGuideStatusCode'] == ReturnMessage::OK ){
-                return back()->with('success','Update Data successful.');
+                return back()->with('success','Create Data successful.');
             } else {
-                return back()->with('error','Update Data successful.');
+                return back()->with('error','Create Data successful.');
             }
         } catch(\Exception $e) {
             $logs = "Room Gallery::";

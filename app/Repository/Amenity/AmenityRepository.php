@@ -42,7 +42,7 @@
                 $type          = $data['type'];
                 $paraObj       = Amenity::find($id);
                 $paraObj->name = $name;
-                $paraObj->type = $type;
+                $paraObj->type = $type; 
                 $tempObj       = Utility::addUpdate($paraObj);
                 $tempObj->save();
                 $returnedObj['softGuideStatusCode'] = ReturnMessage::OK;

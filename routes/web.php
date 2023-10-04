@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Amenity\AmenityController;
 use App\Http\Controllers\errors\RouteErrorController;
 use App\Http\Controllers\Frontend\frontendController;
+use App\Http\Controllers\Reservation\ReservationController;
+use App\Http\Controllers\Setting\SettingController;
 use App\Http\Controllers\SpecialFeature\SpecialFeatureController;
 
 
@@ -30,8 +32,16 @@ Route::get('admin-backend/login',[LoginController::class,'getLogin'])->name('log
 Route::get('admin-backend/logout',[LoginController::class,'getLogout'])->name('logout');
 Route::post('admin-backend/login',[LoginController::class,'postlogin'])->name('postlogin');
 
-Route::get('/room/detail/{id}',[frontendController::class,'frontendDetail']);
-Route::get('rooms',[frontendController::class,'rooms'])->name('rooms');
+// for room table frontend 
+Route::prefix('rooms')->group(function (){
+    Route::get('detail/{id}',[frontendController::class,'frontendDetail']);
+    Route::get('/',[frontendController::class,'rooms'])->name('rooms');
+    Route::get('reserve/{id}',[frontendController::class,'roomReserve']);
+    Route::post('reserved',[frontendController::class,'roomReserved'])->name('roomReserve');
+    Route::get('search',[frontendController::class,'RoomSearch'])->name('roomSearch');
+});
+
+
 Route::group(['prefix' => 'admin-backend','middleware' => 'admin'], function () {
     Route::get('index', [HomeController::class,'index'])->name('index');
 
@@ -87,6 +97,11 @@ Route::group(['prefix' => 'admin-backend','middleware' => 'admin'], function () 
         Route::post('room-gallery/create',[RoomController::class,'galleryCreate'])->name('roomGallery');
         
     });
+    // reservation listing 
+    Route::get('reservation/listing',[ReservationController::class,'ReservationListing']);
+    Route::get('reservation/confirm/{id}',[ReservationController::class,'ReservationConfrim']);
+    Route::get('reservation/delete/{id}',[ReservationController::class,'delete']);
+
 
     // for special feature 
     Route::prefix('feature')->group(function () {
@@ -98,7 +113,12 @@ Route::group(['prefix' => 'admin-backend','middleware' => 'admin'], function () 
         Route::post('updated',[SpecialFeatureController::class,'FeatureUpdate'])->name('FeatureUpdate');
         
     });
-
+    // site setting 
+    Route::prefix('setting')->group(function () {
+        Route::get('/',[SettingController::class,'SettingEdit'])->name('SettingEdit');
+        Route::post('updated',[SettingController::class,'SettingUpdate'])->name('SettingUpdate');
+        
+    });
     // route error 
     // Route::get('/error',[RouteErrorController::class,'RouteError'])->name('RouteError');
 });

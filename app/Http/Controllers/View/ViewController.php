@@ -32,7 +32,14 @@ class ViewController extends Controller
         
     }
     public function form(){
-        return view('backend.view.form');
+        try {
+            return view('backend.view.form');
+        } catch (\Exception $e) {
+            $logs = "View sreen create::";
+            $logs = $e->getMessage();
+            Utility::saveErrorLog($logs);
+            abort(500);
+        }
     }
     public function create(ViewRequest $request){
         
@@ -56,8 +63,18 @@ class ViewController extends Controller
 
    
     public function viewEdit($id){
-        $view_data = $this->viewRepository->viewEdit($id);
-        return view('backend.view.form',compact(['view_data']));
+        try {
+            $view_data = $this->viewRepository->viewEdit($id);
+            $logs = "View sreen Update::";
+            Utility::saveDebugLog($logs);
+            return view('backend.view.form',compact(['view_data']));
+        } catch (\Exception $e) {
+            $logs = "View sreen Update::";
+            $logs = $e->getMessage();
+            Utility::saveErrorLog($logs);
+            abort(500);
+        }
+        
         
     }
     public function viewUpdate(ViewRequest $request){

@@ -46,4 +46,19 @@
   <br />
   </div>
         <!-- /page content -->
+  <script src="{{ URL::asset('assets/backend/js/pages/upload_img.js?v=20230802') }}"></script>
+  <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.js') }}"></script>
+  <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.buttons.js') }}"></script>
+  <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.nonblock.js') }}"></script>
+  @if(session('success'))
+      <script>
+      new PNotify({
+      title: 'Success',
+      text: '{{ session()->get('success') }}',
+      type: 'success',
+      hide: false,
+      styling: 'bootstrap3'
+      }); 
+      </script>";
+  @endif
 @endsection

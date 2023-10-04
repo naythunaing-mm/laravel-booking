@@ -1,5 +1,7 @@
-@include('layouts.partial.header')
-@yield('content')
+@extends('layouts.master')
+@section('title','Admin::Room Gallery')
+@section('content')
+
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
@@ -77,10 +79,8 @@
             </div>
         </div>
     </div>
-        <!-- /page content -->
-@include('layouts.partial.footer')
+
         <script src="{{ URL::asset('assets/backend/js/pages/upload_img.js?v=20230802') }}"></script>
-        <!-- pnotify -->
         <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.js') }}"></script>
         <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.buttons.js') }}"></script>
         <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.nonblock.js') }}"></script>
@@ -96,3 +96,4 @@
             </script>";
         @endif
 </html>
+@endsection

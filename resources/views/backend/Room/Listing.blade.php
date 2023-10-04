@@ -1,5 +1,7 @@
-@include('layouts.partial.header')
-@yield('content')
+@extends('layouts.master')
+@section('title','Admin::Room Listing')
+@section('content')
+
 <div class="right_col" role="main">
 <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
@@ -45,8 +47,8 @@
                                   <td>
                                       <a href="{{ URL::to('admin-backend/room/room-gallery') }}/{{ $room->id }}" class="btn btn-success btn-xs"><small><i class="fa fa-photo"> Gallery</i></small></a>
                                       <a href="{{ URL::to('admin-backend/room/detail') }}/{{ $room->id }}" class="btn btn-primary btn-xs"><i class="fa fa-eye"> View</i></a>
-                                      <a href="{{ URL::to('admin-backend/room/edit/') }}/{{ $room->id }}" class="btn btn-info btn-xs"><small><i class="fa fa-pencil"> Edit</i></small></a>
-                                      <a href="{{ URL::to('admin-backend/room/delete/') }}{{ $room->id }}" class="btn btn-danger btn-xs"><small><i class="fa fa-trash-o"> Delete</i></small></a>
+                                      <a href="{{ URL::to('admin-backend/room/edit') }}/{{ $room->id }}" class="btn btn-info btn-xs"><small><i class="fa fa-pencil"> Edit</i></small></a>
+                                      <a href="{{ URL::to('admin-backend/room/delete') }}/{{ $room->id }}" class="btn btn-danger btn-xs"><small><i class="fa fa-trash-o"> Delete</i></small></a>
                                   </td>
                               </tr>
                                 @endforeach
@@ -60,22 +62,22 @@
               </div>
 </div>
 
-@include('layouts.partial.footer')
-         <!-- pnotify -->
-    <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.js') }}"></script>
-    <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.buttons.js') }}"></script>
-    <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.nonblock.js') }}"></script>
-    @if(session('success'))
-    <script>
-      new PNotify({
-      title: 'Success',
-      text: '{{ session()->get('success') }}',
-      type: 'success',
-      hide: false,
-      styling: 'bootstrap3'
-      }); 
-    </script>";
+
+  <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.js') }}"></script>
+  <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.buttons.js') }}"></script>
+  <script src="{{ URL::asset('assets/backend/css/pnotify/pnotify.nonblock.js') }}"></script>
+  @if(session('success'))
+  <script>
+    new PNotify({
+    title: 'Success',
+    text: '{{ session()->get('success') }}',
+    type: 'success',
+    hide: false,
+    styling: 'bootstrap3'
+    }); 
+  </script>";
     
 @endif
 
 </html>
+@endsection

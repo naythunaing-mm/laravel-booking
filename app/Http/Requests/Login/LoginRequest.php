@@ -36,9 +36,9 @@ class LoginRequest extends FormRequest
     }
     public function messages(){
         return  [
-                'name.required'     => 'Please fill view Name',
+                'name.required'     => 'Please fill Name',
                 'name.max'          => 'Name length is less then 10',
-                'password.required' => 'Please fill view Name',
+                'password.required' => 'Please fill  Password',
         ];
     }
 }

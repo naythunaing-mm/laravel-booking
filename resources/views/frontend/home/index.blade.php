@@ -1,17 +1,17 @@
 @extends('frontend.layouts.master')
-@section('title','Admin::Home Page')
+@section('title','SoftGuide::Home Page')
 @section('content')
     <section class="ftco-booking ftco-section ftco-no-pt ftco-no-pb">
     	<div class="container">
     		<div class="row no-gutters">
     			<div class="col-lg-12">
-    				<form action="room_search.php" class="booking-form aside-stretch" method="GET">
+    				<form action="{{ route('roomSearch') }}" class="booking-form aside-stretch" method="GET">
 	        		<div class="row">
 	        			<div class="col-md d-flex py-md-4">
 	        				<div class="form-group align-self-stretch d-flex align-items-end">
 	        					<div class="wrap align-self-stretch py-3 px-4">
 				    					<label for="#">Check-in Date</label>
-				    					<input type="text" name="checkin" id="checkin" class="form-control checkin_date" placeholder="Check-in date">
+				    					<input type="text" name="checkin" id="checkin" class="form-control checkin" placeholder="Check-in date" readonly>
 			    					</div>
 			    				</div>
 	        			</div>
@@ -19,7 +19,7 @@
 	        				<div class="form-group align-self-stretch d-flex align-items-end">
 	        					<div class="wrap align-self-stretch py-3 px-4">
 				    					<label for="#">Check-out Date</label>
-				    					<input type="text" class="form-control checkout_date" id="checkout" name="checkout" placeholder="Check-out date">
+				    					<input type="text" class="form-control checkout" id="checkout" name="checkout" placeholder="Check-out date" readonly>
 			    					</div>
 			    				</div>
 	        			</div>
@@ -162,7 +162,7 @@
 	            <h2 class="mb-4"> the Most Recommended Hotel All Over the World</h2>
 	          </div>
 	          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-	          <p><a href="#" class="btn btn-secondary rounded">Reserve Your Room Now</a></p>
+	          <p><a href="{{route('rooms')}}" class="btn btn-secondary rounded">Reserve Your Room Now</a></p>
 					</div>
 				</div>
 			</div>
@@ -256,36 +256,50 @@
             <h2 class="mb-4">Hotel Master's Rooms</h2>
           </div>
         </div>  
-    		<div class="row no-gutters">
-                @if (count($rooms) >= 1)
-				@php $room_count = 0; @endphp
-				@foreach ($rooms as $room)
-					@php $room_count++; @endphp
-					@php
-						$class1 = ($room_count < 3 || $room_count > 4) ? '' : 'order-md-last';
-						$class2 = ($room_count < 3 || $room_count > 4) ? 'left-arrow' : 'right-arrow';
-						$detail_link = "room/detail/" . $room->id;
-					@endphp
-					<div class="col-lg-6">
-						<div class="room-wrap d-md-flex ftco-animate">
-							{{-- <img src="{{ URL::asset('assets/upload/'. $room->id . '/thumb/'. $room->thumbnail )}}" alt="" class=" {{ $class1 }}"> --}}
-
-							<a href="#" class="img {{ $class1 }}" style="background-image: url({{ URL::asset('assets/upload/'. $room->id . '/thumb/'. $room->thumbnail )}});"></a>
-							<div class="half  {{ $class2 }}  d-flex align-items-center">
-								<div class="text p-4 text-center">
-									<p class="star mb-0"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span></p>
-									<p class="mb-0"><span class="price mr-1">{{ $room->price_per_day }} {{ (getsiteconfig() !== '')? getsiteconfig()->price_unit : '' }}</span> <span class="per">per night</span></p>
-									<h3 class="mb-3"><a href="">{{ $room->name }}</a></h3>
-									<p class="pt-1"><a href="{{ $detail_link }}" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
-								</div>
-							</div>
-						</div>
+<div class="row no-gutters">
+@if (count($rooms) >= 1)
+	@php $room_count = 0; @endphp
+	@foreach ($rooms as $room)
+		@php $room_count++; @endphp
+		@php
+			$class1 = ($room_count < 3 || $room_count > 4) ? '' : 'order-md-last';
+			$class2 = ($room_count < 3 || $room_count > 4) ? 'left-arrow' : 'right-arrow';
+			$detail_link = "rooms/detail/" . $room->id;
+		@endphp
+		<div class="col-lg-6">
+			<div class="room-wrap d-md-flex ftco-animate">
+				<img src="{{ URL::asset('assets/upload/'. $room->id . '/thumb/'. $room->thumbnail )}}" style="width:322px" alt="" class=" {{ $class1 }}">
+				<div class="half  {{ $class2 }}  d-flex align-items-center">
+					<div class="text p-4 text-center">
+						<p class="star mb-0"><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span><span class="ion-ios-star"></span></p>
+						<p class="mb-0"><span class="price mr-1">{{ $room->price_per_day }} {{ (getsiteconfig() !== '')? getsiteconfig()->price_unit : '' }}</span> <span class="per">per night</span></p>
+						<h3 class="mb-3"><a href="">{{ $room->name }}</a></h3>
+						<p class="pt-1"><a href="{{ $detail_link }}" class="btn-custom px-3 py-2 rounded">View Details <span class="icon-long-arrow-right"></span></a></p>
 					</div>
-				@endforeach
-			@endif
-			
-    			
-    		</div>
+				</div>
+			</div>
+		</div>
+	@endforeach
+@endif	
+</div>
     	</div>
     </section>
 @endsection
+<script src="{{ URL::asset('assets/frontend/js/jquery.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+			$("#checkin").datepicker({
+				minDate: 0,
+				onSelect: function(selectedDate) {
+					var minDate = new Date(selectedDate);
+					minDate.setDate(minDate.getDate()+1);
+					$("#checkout").datepicker("option", "minDate", minDate);
+					$("#checkout").prop("disabled",false);
+				}
+			});
+          
+			$("#checkout").datepicker({
+				minDate: 0
+			});
+        });
+</script>
